@@ -3,6 +3,7 @@ package id.sch.smktelkom_mlg.learn.navigation4;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -61,28 +62,52 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        Fragment fragment = null;
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.nav_home) {
+            fragment = new HomeFragment();
+            setTitle("Home");
+        } else if (id==R.id.nav_camera){
+            fragment = new ImportFragment();
+            setTitle("Import");
+        } else if (id==R.id.nav_gallery){
+
+        } else if (id==R.id.nav_slideshow) {
+
+        } else if (id==R.id.nav_manage) {
+
+        } else if (id==R.id.nav_share) {
+
+        } else if (id==R.id.nav_send) {
+
         }
 
-        return super.onOptionsItemSelected(item);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container,fragment).commitNow();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Fragment fragment = null;
+
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_home) {
+            fragment = new HomeFragment();
+            setTitle("Home");
+        } else if (id == R.id.nav_camera) {
+            fragment = new ImportFragment();
+            setTitle("Import");
+        }
+         else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -93,6 +118,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container,fragment).commitNow();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
